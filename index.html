@@ -1,53 +1,77 @@
 ---
 layout: default
-title: "Tvoiholst"
+title: "Новости о птицах"
 navigationName: "- Добро пожаловать!"
-description: "Экосумки. Интересные арт, эко и био проекты"
-coverImg: "home.png"
+description: "Анонсы орнитологических мероприятий. Выставки птиц. Фестивали, конкурсы. Бердвотчинг. Интересные арт, эко и био проекты"
+coverImg: "home-bg.jpg"
 
 
 ---
-<div class="container">
+ <div class="container">
         <div class="row">
             <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1" style="font-size: 0.8em;">
-                <p>Приветствуем Вас! Создавая этот сайт мы решили сконцентрироваться на экологических тенденциях. Мы будем держать руку на пульсе всех современных методик и производств</p>
-            </div>
-        </div>
+                <p>Приветствуем Вас! Создавая этот сайт «Новости о птицах» при сборе информации мы решили сконцентрироваться на анонсах мероприятий. На тех птичьих конкурсах, выставках и акциях, в которых можно лично поучаствовать. Обращаемся к активистам в различных городах - без вас мы не справимся! <a href="/contact.html">Расскажите</a>, в каком городе, селе, деревне, населенном пунке Вы живете, в каком месте вы обсуждаете свои увлечения птицами (группы в соцсетях, сайт, форум, клуб) - и мы включим данный ресурс в наш мониторинг мероприятий.</p>
+            </div></div></div>
+<hr>
+<div style="margin:0 auto; padding:20px; text-align: center;">
+{% for p in site.pages %}
+  {% if p.url contains '/tags/' %}
+    <a href="{{p.url}}">{{p.name | remove: '.html'}}</a>
+  {% endif %}
+{% endfor %}
+</div>
+<hr>
+
+
+    <!-- Main Content -->
+    <div class="container">
         <div class="row">
             <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1">
-        {% for news in paginator.posts %}
+
+        {% for news in paginator.posts %}    
+            {% unless news.tags contains "Интересное" or news.tags contains "Репортажи и отчеты"%}
                  {% cycle 'add row' : '<div class="row">', '', %}
-
-            <div class="col-sm-6">
-                                   <div class="post-preview">
-                        <a href="{{ post.url }}">
-
-
-                             <img width="100%" src="/img/post-bg{{ post.prewImg }}.png">
-                            <h2 class="post-title">
-                                {{ post.title }}
-                            </h2>
-                            <h3 class="post-subtitle">
-                                {{ post.description }}
-                            </h3>
-                        </a>
-                        <p class="post-meta">Опубликовано автором <a href="#">{{ post.author }}</a> {{ news.date | date: "%Y-%m-%d" }}</p>
+                    <div class="col-sm-6">
+                        <div class="post-preview">
+                            <a href="{{ news.url }}">
+                                 <img width="100%" src="/img/post-bg{{ news.prewImg }}.png">
+                                <h2 class="post-title">
+                                    {{ news.title }}
+                                </h2>
+                                <h3 class="post-subtitle">
+                                    {{ news.description }}
+                                </h3>
+                            </a>
+                            <p class="post-meta">Опубликовано автором <a href="#">{{ news.author }}</a> {{ news.date | date: "%Y-%m-%d" }}</p>
+                           <!-- <p class="post-meta"> {{ news.tags }} </p>-->
+                        </div>
+                        <hr>
                     </div>
-                    <hr>
-            </div>
-
-                {% cycle 'end row' : '', '</div>' %}
+                    {% cycle 'end row' : '', '</div>' %}               
+                {% endunless %}
          {% endfor %}
+    
+
         {% cycle 'end row' : '', '</div>' %}
 
-             
+                <!-- Pager -->
+                <ul class="pager">
+                    {% if paginator.previous_page %}
+                    <li class="previous">
+                        <a href="{{ paginator.previous_page_path }}">&larr; Prev Posts</a>
+                    </li>
+                    {% endif %}
 
+                    {% if paginator.next_page %}
+                    <li class="next">
+                        <a href="{{ paginator.next_page_path }}">Older Posts &rarr;</a>
+                    </li>
+                    {% endif %}
+                </ul>
             </div>
-</div> 
-      
+        </div>
 
 
-
-
-
-
+    <hr>
+<div id="disqus_thread"></div>
+{% include disqus.html %}
