@@ -28,8 +28,7 @@ coverImg: "home.png"
         <div class="row">
             <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1">
 
-        {% for news in paginator.posts %}    
-            {% unless news.tags contains "Интересное" or news.tags contains "Репортажи и отчеты"%}
+        {% for news in paginator.posts %}
                  {% cycle 'add row' : '<div class="row">', '', %}
                     <div class="col-sm-6">
                         <div class="post-preview">
@@ -48,7 +47,6 @@ coverImg: "home.png"
                         <hr>
                     </div>
                     {% cycle 'end row' : '', '</div>' %}               
-                {% endunless %}
          {% endfor %}
     
 
@@ -74,4 +72,4 @@ coverImg: "home.png"
 
     <hr>
 <div id="disqus_thread"></div>
-{% include disqus.html %}
+
