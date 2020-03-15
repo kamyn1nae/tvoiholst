@@ -28,22 +28,22 @@ coverImg: "home.png"
         <div class="row">
             <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1">
 
-        {% for news in paginator.posts %}    
-            {% unless news.tags contains "Интересное" or news.tags contains "Репортажи и отчеты"%}
+        {% for newss in paginator.posts %}    
+            {% unless newss.tags contains "Интересное" or newss.tags contains "Репортажи и отчеты"%}
                  {% cycle 'add row' : '<div class="row">', '', %}
                     <div class="col-sm-6">
                         <div class="post-preview">
-                            <a href="{{ news.url }}">
-                                 <img width="100%" src="/img/post-bg{{ news.prewImg }}.png">
+                            <a href="{{ newss.url }}">
+                                 <img width="100%" src="/img/post-bg{{ newss.prewImg }}.png">
                                 <h2 class="post-title">
-                                    {{ news.title }}
+                                    {{ newss.title }}
                                 </h2>
                                 <h3 class="post-subtitle">
-                                    {{ news.description }}
+                                    {{ newss.description }}
                                 </h3>
                             </a>
-                            <p class="post-meta">Опубликовано автором <a href="#">{{ news.author }}</a> {{ news.date | date: "%Y-%m-%d" }}</p>
-                           <!-- <p class="post-meta"> {{ news.tags }} </p>-->
+                            <p class="post-meta">Опубликовано автором <a href="#">{{ newss.author }}</a> {{ newss.date | date: "%Y-%m-%d" }}</p>
+                           <!-- <p class="post-meta"> {{ newss.tags }} </p>-->
                         </div>
                         <hr>
                     </div>
